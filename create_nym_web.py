@@ -47,7 +47,7 @@ def main(unused_argv):
     if not category.exists(): continue
     for subcategory in category.categorymembers.values():
       if subcategory.ns == wapi.Namespace.CATEGORY:
-        open_list.append(subcategory.title)
+        open_list.append(subcategory.title.replace('Category:', ''))
         add_non_term_node(fp, subcategory.title)
         add_edge(fp, node, subcategory.title, 'cat_cat')
     for page in category.categorymembers.values():
