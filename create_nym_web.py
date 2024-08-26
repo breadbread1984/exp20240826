@@ -32,7 +32,7 @@ def main(unused_argv):
   fp = open(FLAGS.output, 'w')
   open_list = list()
   close_list = set()
-  for term in terms:
+  for term in terms['terms']:
     page = wiki.page(term)
     if not page.exists(): continue
     categories = page.categories
