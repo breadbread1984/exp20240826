@@ -7,7 +7,7 @@ from langchain_core.prompts.prompt import PromptTemplate
 
 def get_terms_template(tokenizer):
   class Terms(BaseModel):
-    terms: List(str) = Field('a list of professional terms')
+    terms: List[str] = Field('a list of professional terms')
   parser = JsonOutputParser(pydantic_object = Terms)
   instructions = parser.get_format_instructions()
   instructions = instructions.replace('{','{{')
