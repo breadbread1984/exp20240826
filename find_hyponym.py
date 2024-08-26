@@ -1,0 +1,60 @@
+#!/usr/bin/python3
+
+import wikipediaapi as wapi
+from absl import app, flags
+
+FLAGS = flags.FLAGS
+
+def add_options():
+  flags.DEFINE_string('terms', default = 'terms.pkl', help = 'a list of terms')
+  flags.DEFINE_string('output', default = 'output.cypher', help = 'cypher script')
+
+def add_non_term_node(fp, node):
+  cypher = "merge (c: Term {text: "%s"}) return c;" % node
+  fp.write(cypher + "\n")
+
+def add_term_node(fp, node):
+  cypher = "merge (c: Category {text: "%s"}) return c;" % node
+  fp.write(cypher + "\n")
+
+def add_edge(fp, node1, node2, mode = 'cat_term'):
+  mode in {'cat_term', 'cat_cat'}
+  typename = 'HAS_TERM' if mode == 'cat_term' else 'HAS_SUBCATEGORY';
+  cypher = "match (a {text: "%s"}), (b {text: "%s"}) merge (a)-[:%s]->(b);" % (node1, node2, typename)
+  fp.write(cypher + "\n")
+
+def main(unused_argv):
+  with open('terms.pkl', 'rb') as f:
+    terms = pickle.loads(f.read())
+  wiki = wapi.Wikipedia('en')
+  fp = open(FLAGS.output, 'w')
+  open_list = list()
+  close_list = set()
+  for term in terms:
+    page = wiki.page(term)
+    if not page.exists(): continue
+    categories = page.categories
+    for title in sorted(categories.keys()):
+      open_list.append(title)
+      add_non_term_node(fp, title)
+  while (len(open_list)):
+    node = open_list.pop(0)
+    if node in close_list: continue
+    close_list.add(node)
+    category = wiki.page(f"Category:{node}")
+    if not category.exists(): continue
+    for subcategory in category.categorymembers.values():
+      if subcategory.ns == wapi.Namespace.CATEGORY:
+        open_list.append(subcategory.title)
+        add_non_term_node(fp, subcategory.title)
+        add_edge(fp, node, subcategory.title, 'cat_cat')
+    for page in category.categorymembers.values():
+      if page.ns == wapi.Namespace.MAIN:
+        add_term_node(fp, page.title)
+        add_edge(fp, node, page.title, 'cate_term')
+  fp.close()
+
+if __name__ == "__main__":
+  add_options()
+  app.run(main)
+
