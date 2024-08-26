@@ -28,7 +28,7 @@ def add_edge(fp, node1, node2, mode = 'cat_term'):
 def main(unused_argv):
   with open('terms.pkl', 'rb') as f:
     terms = pickle.loads(f.read())
-  wiki = wapi.Wikipedia('en')
+  wiki = wapi.Wikipedia(user_agent = 'wikpediaapi', language = 'en')
   fp = open(FLAGS.output, 'w')
   open_list = list()
   close_list = set()
