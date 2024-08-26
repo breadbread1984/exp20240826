@@ -34,7 +34,9 @@ def main(unused_argv):
   close_list = set()
   for term in terms['terms']:
     page = wiki.page(term)
-    if not page.exists(): continue
+    if not page.exists():
+      print(f'can\'t find term {term} on wikipedia!')
+      continue
     categories = page.categories
     for title in sorted(categories.keys()):
       open_list.append(title)
