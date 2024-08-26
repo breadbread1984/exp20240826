@@ -10,17 +10,17 @@ def add_options():
   flags.DEFINE_string('output', default = 'output.cypher', help = 'cypher script')
 
 def add_non_term_node(fp, node):
-  cypher = "merge (c: Term {text: "%s"}) return c;" % node
+  cypher = "merge (c: Term {text: \"%s\"}) return c;" % node
   fp.write(cypher + "\n")
 
 def add_term_node(fp, node):
-  cypher = "merge (c: Category {text: "%s"}) return c;" % node
+  cypher = "merge (c: Category {text: \"%s\"}) return c;" % node
   fp.write(cypher + "\n")
 
 def add_edge(fp, node1, node2, mode = 'cat_term'):
   mode in {'cat_term', 'cat_cat'}
   typename = 'HAS_TERM' if mode == 'cat_term' else 'HAS_SUBCATEGORY';
-  cypher = "match (a {text: "%s"}), (b {text: "%s"}) merge (a)-[:%s]->(b);" % (node1, node2, typename)
+  cypher = "match (a {text: \"%s\"}), (b {text: \"%s\"}) merge (a)-[:%s]->(b);" % (node1, node2, typename)
   fp.write(cypher + "\n")
 
 def main(unused_argv):
