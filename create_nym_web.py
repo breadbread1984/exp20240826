@@ -48,14 +48,15 @@ def main(unused_argv):
     close_list.add(node)
     category = wiki.page(f"Category:{node}")
     if not category.exists(): continue
-    for subcategory in category.categorymembers.values():
-      if subcategory.ns == wapi.Namespace.CATEGORY:
+    for category_or_term in category.categorymembers.values():
+      if category_or_term.ns == wapi.Namespace.CATEGORY:
+        subcategory = category_or_term
         category_name = subcategory.title.replace('Category:', '')
         open_list.append(category_name)
         add_non_term_node(fp, category_name)
         add_edge(fp, node, category_name, 'cat_cat')
-    for page in category.categorymembers.values():
-      if page.ns == wapi.Namespace.MAIN:
+      if category_or_term.ns == wapi.Namespace.MAIN:
+        page = category_or_term
         add_term_node(fp, page.title)
         add_edge(fp, node, page.title, 'cate_term')
   fp.close()
