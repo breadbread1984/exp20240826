@@ -21,7 +21,8 @@ def add_term_node(fp, node):
 def add_edge(fp, node1, node2, mode = 'cat_term'):
   mode in {'cat_term', 'cat_cat'}
   typename = 'HAS_TERM' if mode == 'cat_term' else 'HAS_SUBCATEGORY';
-  cypher = "match (a {text: \"%s\"}), (b {text: \"%s\"}) merge (a)-[:%s]->(b);" % (node1, node2, typename)
+  nodetype = 'Term' if mode == 'cat_term' else 'Categoriy'
+  cypher = "match (a: Category {text: \"%s\"}), (b: %s {text: \"%s\"}) merge (a)-[:%s]->(b);" % (node1, nodetype, node2, typename)
   fp.write(cypher + "\n")
 
 def main(unused_argv):
