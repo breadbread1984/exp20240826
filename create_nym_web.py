@@ -22,7 +22,7 @@ def add_non_term_node(fp, node):
 def add_edge(fp, node1, node2, mode = 'cat_term'):
   mode in {'cat_term', 'cat_cat'}
   typename = 'HAS_TERM' if mode == 'cat_term' else 'HAS_SUBCATEGORY';
-  nodetype = 'Term' if mode == 'cat_term' else 'Categoriy'
+  nodetype = 'Term' if mode == 'cat_term' else 'Category'
   cypher = "match (a: Category {text: \"%s\"}), (b: %s {text: \"%s\"}) merge (a)-[:%s]->(b);" % (node1, nodetype, node2, typename)
   fp.write(cypher + "\n")
 
@@ -60,7 +60,7 @@ def main(unused_argv):
       if category_or_term.ns == wapi.Namespace.MAIN:
         page = category_or_term
         add_term_node(fp, page.title)
-        add_edge(fp, node, page.title, 'cate_term')
+        add_edge(fp, node, page.title, 'cat_term')
   fp.close()
 
 if __name__ == "__main__":
