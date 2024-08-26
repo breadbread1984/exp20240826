@@ -39,7 +39,8 @@ def main(unused_argv):
       continue
     categories = page.categories
     for title in sorted(categories.keys()):
-      open_list.append(title)
+      category_name = title.replace('Category:','')
+      open_list.append(category_name)
       add_non_term_node(fp, title)
   while (len(open_list)):
     node = open_list.pop(0)
