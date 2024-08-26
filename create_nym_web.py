@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import pickle
 import wikipediaapi as wapi
 from absl import app, flags
 
