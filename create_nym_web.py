@@ -47,9 +47,10 @@ def main(unused_argv):
     if not category.exists(): continue
     for subcategory in category.categorymembers.values():
       if subcategory.ns == wapi.Namespace.CATEGORY:
-        open_list.append(subcategory.title.replace('Category:', ''))
-        add_non_term_node(fp, subcategory.title)
-        add_edge(fp, node, subcategory.title, 'cat_cat')
+        category_name = subcategory.title.replace('Category:', '')
+        open_list.append(category_name)
+        add_non_term_node(fp, category_name)
+        add_edge(fp, node, category_name, 'cat_cat')
     for page in category.categorymembers.values():
       if page.ns == wapi.Namespace.MAIN:
         add_term_node(fp, page.title)
