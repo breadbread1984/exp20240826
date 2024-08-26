@@ -8,6 +8,7 @@ FLAGS = flags.FLAGS
 
 def add_options():
   flags.DEFINE_string('terms', default = 'terms.pkl', help = 'a list of terms')
+  flags.DEFINE_integer('depth', default = 3, help = 'depth')
   flags.DEFINE_string('output', default = 'output.cypher', help = 'cypher script')
 
 def add_term_node(fp, node):
@@ -40,10 +41,10 @@ def main(unused_argv):
     categories = page.categories
     for title in sorted(categories.keys()):
       category_name = title.replace('Category:','')
-      open_list.append(category_name)
+      open_list.append((category_name, 1))
       add_non_term_node(fp, category_name)
   while (len(open_list)):
-    node = open_list.pop(0)
+    node, d = open_list.pop(0)
     if node in close_list: continue
     close_list.add(node)
     category = wiki.page(f"Category:{node}")
@@ -52,7 +53,8 @@ def main(unused_argv):
       if category_or_term.ns == wapi.Namespace.CATEGORY:
         subcategory = category_or_term
         category_name = subcategory.title.replace('Category:', '')
-        open_list.append(category_name)
+        if d < FLAGS.depth:
+          open_list.append((category_name, d + 1))
         add_non_term_node(fp, category_name)
         add_edge(fp, node, category_name, 'cat_cat')
       if category_or_term.ns == wapi.Namespace.MAIN:
