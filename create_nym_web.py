@@ -41,7 +41,7 @@ def main(unused_argv):
     for title in sorted(categories.keys()):
       category_name = title.replace('Category:','')
       open_list.append(category_name)
-      add_non_term_node(fp, title)
+      add_non_term_node(fp, category_name)
   while (len(open_list)):
     node = open_list.pop(0)
     if node in close_list: continue
