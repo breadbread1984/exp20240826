@@ -8,7 +8,7 @@ FLAGS = flags.FLAGS
 
 def add_options():
   flags.DEFINE_enum('model', default = 'llama3', enum_values = {'llama3', 'qwen2'}, help = 'model')
-  flags.DEFINE_integer('n', default = 100, help = 'how many terms')
+  flags.DEFINE_integer('n', default = 50, help = 'how many terms')
 
 def main(unused_argv):
   chain = term_chain(FLAGS.model)
