@@ -7,16 +7,16 @@ from langchain_core.prompts.prompt import PromptTemplate
 
 def get_terms_template(tokenizer):
   class Terms(BaseModel):
-    terms: List[str] = Field('a list of professional terms in field of {field}.')
+    terms: List[str] = Field('a list of {quantity} most popular professional terms in field of {field}.')
   parser = JsonOutputParser(pydantic_object = Terms)
   instructions = parser.get_format_instructions()
   instructions = instructions.replace('{','{{')
   instructions = instructions.replace('}','}}')
-  user_prompt = "Please list all professional terms in the field of {field}. \n\n%s" % instructions
+  user_prompt = "Please list {quantity} most popular professional terms in the field of {field}. \n\n%s" % instructions
   messages = [
     {'role': 'user', 'content': user_prompt},
   ]
   prompt = tokenizer.apply_chat_template(messages, tokenize = False, add_generation_prompt = True)
-  template = PromptTemplate(template = prompt, input_vairables = ['field'])
+  template = PromptTemplate(template = prompt, input_vairables = ['quantity', 'field'])
   return template, parser
 
