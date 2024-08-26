@@ -12,7 +12,7 @@ def add_options():
 
 def main(unused_argv):
   chain = term_chain(FLAGS.model)
-  terms = chain.invoke({'quantity': '%d' % FLAGS.n,'field': 'sulfide electrolyte'})
+  terms = chain.invoke({'quantity': '%d' % FLAGS.n,'field': 'rechargable battery electrolyte'})
   with open('terms.pkl', 'wb') as f:
     f.write(pickle.dumps(terms))
 
