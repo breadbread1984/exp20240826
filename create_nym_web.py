@@ -10,11 +10,11 @@ def add_options():
   flags.DEFINE_string('terms', default = 'terms.pkl', help = 'a list of terms')
   flags.DEFINE_string('output', default = 'output.cypher', help = 'cypher script')
 
-def add_non_term_node(fp, node):
+def add_term_node(fp, node):
   cypher = "merge (c: Term {text: \"%s\"}) return c;" % node
   fp.write(cypher + "\n")
 
-def add_term_node(fp, node):
+def add_non_term_node(fp, node):
   cypher = "merge (c: Category {text: \"%s\"}) return c;" % node
   fp.write(cypher + "\n")
 
