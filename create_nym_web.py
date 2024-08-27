@@ -33,7 +33,7 @@ def main(unused_argv):
   fp = open(FLAGS.output, 'w')
   open_list = list()
   close_list = set()
-  for term in terms['terms']:
+  for term in terms['properties']['terms']:
     page = wiki.page(term)
     if not page.exists():
       print(f'can\'t find term {term} on wikipedia!')
