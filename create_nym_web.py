@@ -54,6 +54,8 @@ def main(unused_argv):
       add_term_node(fp, term)
       add_edge(fp, category, term, 'cat_term')
     for subcategory in [subcategory for subcategory in page.categories if len(subcategory.split(' ')) <= 3]:
+      if d < FLAGS.depth:
+        openlist.append((subcategory, d + 1))
       add_non_term_node(fp, category_name)
       add_edge(fp, category, subcategory, 'cat_cat')
   fp.close()
