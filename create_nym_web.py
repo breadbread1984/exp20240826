@@ -56,7 +56,7 @@ def main(unused_argv):
     for subcategory in [subcategory for subcategory in page.categories if len(subcategory.split(' ')) <= 3]:
       if d < FLAGS.depth:
         open_list.append((subcategory, d + 1))
-      add_non_term_node(fp, category_name)
+      add_non_term_node(fp, subcategory)
       add_edge(fp, category, subcategory, 'cat_cat')
   fp.close()
 
