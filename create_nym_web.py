@@ -50,14 +50,16 @@ def main(unused_argv):
       page = wiki.page(f"Category:{category}")
     except:
       continue
-    for term in page.links:
-      add_term_node(fp, term)
-      add_edge(fp, category, term, 'cat_term')
-    for subcategory in [subcategory for subcategory in page.categories if len(subcategory.split(' ')) <= 3]:
-      if d < FLAGS.depth:
-        open_list.append((subcategory, d + 1))
-      add_non_term_node(fp, subcategory)
-      add_edge(fp, category, subcategory, 'cat_cat')
+    if hasattr(page, 'links'):
+      for term in page.links:
+        add_term_node(fp, term)
+        add_edge(fp, category, term, 'cat_term')
+    if hasattr(page, 'categories'):
+      for subcategory in [subcategory for subcategory in page.categories if len(subcategory.split(' ')) <= 3]:
+        if d < FLAGS.depth:
+          open_list.append((subcategory, d + 1))
+        add_non_term_node(fp, subcategory)
+        add_edge(fp, category, subcategory, 'cat_cat')
   fp.close()
 
 if __name__ == "__main__":
