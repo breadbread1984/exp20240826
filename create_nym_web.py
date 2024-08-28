@@ -38,7 +38,7 @@ def main(unused_argv):
     except:
       print(f'can\'t find term {term} on wikipedia!')
       continue
-    categories = [category for category in page.categories if len(category.split(' ')) <= 4]
+    categories = [category for category in page.categories if len(category.split(' ')) <= 3]
     for category in sorted(categories):
       open_list.append((category, 1))
       add_non_term_node(fp, category)
@@ -53,7 +53,7 @@ def main(unused_argv):
     for term in page.links():
       add_term_node(fp, term)
       add_edge(fp, category, term, 'cat_term')
-    for subcategory in [subcategory for subcategory in page.categories if len(subcategory.split(' ')) <= 4]:
+    for subcategory in [subcategory for subcategory in page.categories if len(subcategory.split(' ')) <= 3]:
       add_non_term_node(fp, category_name)
       add_edge(fp, category, subcategory, 'cat_cat')
   fp.close()
