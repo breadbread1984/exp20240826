@@ -50,7 +50,7 @@ def main(unused_argv):
       page = wiki.page(f"Category:{category}")
     except:
       continue
-    for term in page.links():
+    for term in page.links:
       add_term_node(fp, term)
       add_edge(fp, category, term, 'cat_term')
     for subcategory in [subcategory for subcategory in page.categories if len(subcategory.split(' ')) <= 3]:
