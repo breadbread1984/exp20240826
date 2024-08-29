@@ -6,7 +6,7 @@ import spacy
 
 FLAGS = flags.FLAGS
 
-def add_option():
+def add_options():
   flags.DEFINE_string('input', default = None, help = 'path to into text')
 
 def main(unused_argv):
