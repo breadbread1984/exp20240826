@@ -9,7 +9,7 @@ FLAGS = flags.FLAGS
 def add_options():
   flags.DEFINE_enum("model", default = 'llama3', enum_values = {'llama3', 'qwen2'}, help = 'model')
   flags.DEFINE_string('input', default = None, help = 'path to into text')
-  flags.DFEINE_string('output', default = 'output.pkl', help = 'path to output pickle file')
+  flags.DEFINE_string('output', default = 'output.pkl', help = 'path to output pickle file')
 
 def main(unused_argv):
   chain = entity_chain(FLAGS.model)
