@@ -20,3 +20,18 @@ def get_terms_template(tokenizer):
   template = PromptTemplate(template = prompt, input_vairables = ['quantity', 'field'])
   return template, parser
 
+def get_entity_template(tokenizer):
+  class Entities(BaseModel):
+    entities: List[str] = Field('a list of entities.')
+  parser = JsonOutputParser(pydantic_object = Entities)
+  instructions = parser.get_format_instructions()
+  instructions = instructions.replace('{','{{')
+  instructions = instructions.replace('}','}}')
+  system_message = "Extract entities from the user given text. \n\n%s" % instructions
+  messages = [
+    {'role': 'system', 'content': system_message},
+    {'role': 'user', 'content': "{text}"}
+  ]
+  prompt = tokenizer.apply_chat_template(messages, tokenize = False, add_generation_prompt = True)
+  template = PromptTemplate(template = prompt, input_variables = ['text'])
+  return template
