@@ -35,7 +35,7 @@ def main(unused_argv):
               tokens.append((substring, sentence_start_pos + token_start_pos))
   results = [(token[0],token[1],token[1] + len(token[0])) for token in tokens]
   with open(FLAGS.output, 'w') as f:
-    f.write(json.dumps(results))
+    f.write(json.dumps(list(set(results))))
 
 if __name__ == "__main__":
   add_options()
