@@ -27,3 +27,8 @@ cat output.cypher | cypher-shell -a <host> -u <username> -p <password> -d <datab
 ```shell
 python3 create_vector_db.py --host <host> --username <username> --password <password> --database <database> --output <path/to/vectordb>
 ```
+
+| prebuilt vectordb | url |
+|-------------------|-----|
+| vectordb.tar.gz   | https://drive.google.com/file/d/1Eqnu5dr0ovmzVSdLzsu7hM6AcPAJY34_/view?usp=sharing |
+
