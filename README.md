@@ -53,3 +53,9 @@ bash batch_spacy.sh
 ```
 
 the output files are under directory ***output_spacy***
+
+## extract all entities from text
+
+```shell
+bash batch_entities.sh
+```
