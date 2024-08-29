@@ -7,6 +7,7 @@ mkdir output
 
 for f in documents/*.txt
 do
-	python3 retriever.py --db vectordb --threshold $THRESHOLD --input "$f" --output output/`basename "$f"`
+	filename=`basename "$f"`
+	python3 retriever.py --db vectordb --threshold $THRESHOLD --input "$f" --output "output/$filename"
 done
 
