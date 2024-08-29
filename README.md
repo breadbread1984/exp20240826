@@ -32,3 +32,10 @@ python3 create_vector_db.py --host <host> --username <username> --password <pass
 |-------------------|-----|
 | vectordb.tar.gz   | https://drive.google.com/file/d/1Eqnu5dr0ovmzVSdLzsu7hM6AcPAJY34_/view?usp=sharing |
 
+## retrieve key words from text
+
+```shell
+bash batch_retriever.sh
+```
+
+the output files are under directory ***output***.
