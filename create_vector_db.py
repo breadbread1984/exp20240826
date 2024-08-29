@@ -4,6 +4,7 @@ from absl import flags, app
 from neo4j import GraphDatabase
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
+from langchain_core.documents.base import Document
 
 FLAGS = flags.FLAGS
 
