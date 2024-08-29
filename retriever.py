@@ -26,12 +26,13 @@ def main(unused_argv):
       sentence_start_pos = text.find(sentence)
       words = sentence.split(' ')
       for n_words in range(1, FLAGS.max_words_per_entity + 1):
-        for i in range(0, len(words), n_words):
-          substring = ' '.join(words[i:i + n_words])
-          matches = retriever.invoke(substring)
-          if len(matches):
-            token_start_pos = sentence.find(substring)
-            tokens.append((substring, sentence_start_pos + token_start_pos))
+        for offset in range(n_words):
+          for i in range(offset, len(words), n_words):
+            substring = ' '.join(words[i:i + n_words])
+            matches = retriever.invoke(substring)
+            if len(matches):
+              token_start_pos = sentence.find(substring)
+              tokens.append((substring, sentence_start_pos + token_start_pos))
   results = [(token[0],token[1],token[1] + len(token[0])) for token in tokens]
   with open(FLAGS.output, 'w') as f:
     f.write(json.dumps(results))
