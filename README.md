@@ -41,6 +41,7 @@ python3 create_vector_db_zy.py
 
 ```shell
 bash batch_retriever.sh
+bash batch_retriever_zy.sh
 ```
 
 the output files are under directory ***output***.
