@@ -3,7 +3,7 @@
 from absl import flags, app
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
-
+import json
 
 FLAGS = flags.FLAGS
 
@@ -12,6 +12,7 @@ def add_options():
   flags.DEFINE_float('threshold', default = 0.5, help = 'threshold')
   flags.DEFINE_integer('max_words_per_entity', default = 3, help = 'maximum words for an entity')
   flags.DEFINE_string('input', default = None, help = 'path to input text')
+  flags.DEFINE_string('output', default = 'output.json', help = 'path to output json')
 
 def main(unused_argv):
   embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
@@ -31,6 +32,9 @@ def main(unused_argv):
           if len(matches):
             token_start_pos = sentence.find(substring)
             tokens.append((substring, sentence_start_pos + token_start_pos))
+  results = [(token[0],token[1],token[1] + len(token[0])) for token in tokens]
+  with open(FLAGS.output, 'w') as f:
+    f.write(json.dumps(results))
 
 if __name__ == "__main__":
   add_options()
