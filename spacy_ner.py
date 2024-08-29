@@ -14,7 +14,7 @@ def main(unused_argv):
   nlp = spacy.load("en_core_web_sm")
   with open(FLAGS.input, 'r') as f:
     doc = nlp(f.read())
-  results = [(ent.text, ent.pos, ent.pos + len(ent.text)) for ent in doc.ents]
+  results = [(ent.text, ent.start, ent.end, ent.label_) for ent in doc.ents]
   with open(FLAGS.output, 'w') as f:
     f.write(json.dumps(results))
 
