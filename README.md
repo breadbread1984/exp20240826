@@ -39,3 +39,11 @@ bash batch_retriever.sh
 ```
 
 the output files are under directory ***output***.
+
+## spacy NER from text
+
+```shell
+bash batch_spacy.sh
+```
+
+the output files are under directory ***output_spacy***
