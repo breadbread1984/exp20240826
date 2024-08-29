@@ -34,4 +34,4 @@ def get_entity_template(tokenizer):
   ]
   prompt = tokenizer.apply_chat_template(messages, tokenize = False, add_generation_prompt = True)
   template = PromptTemplate(template = prompt, input_variables = ['text'])
-  return template
+  return template, parser
