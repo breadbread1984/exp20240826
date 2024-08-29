@@ -20,7 +20,7 @@ def main(unused_argv):
   records, summary, keys = driver.execute_query('match (a: Term) return a as term', database_ = FLAGS.database)
   terms = [record['term']['text'] for record in records]
   embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
-  vectordb = Chroma(documents = [Document(page_content = term) for term in terms], embedding_function = embeddings, persist_directory = FLAGS.output)
+  vectordb = Chroma.from_documents(documents = [Document(page_content = term) for term in terms], embedding_function = embeddings, persist_directory = FLAGS.output)
   vectordb.persist()
 
 if __name__ == "__main__":
