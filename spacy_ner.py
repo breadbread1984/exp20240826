@@ -8,6 +8,7 @@ FLAGS = flags.FLAGS
 
 def add_options():
   flags.DEFINE_string('input', default = None, help = 'path to into text')
+  flags.DEFINE_string('output', default = 'output.json', help = 'path to output json')
 
 def main(unused_argv):
   nlp = spacy.load("en_core_web_sm")
