@@ -1,0 +1,1 @@
+[["Li3PS4", 62, 63, "PRODUCT"], ["Li4SnS4", 64, 65, "PRODUCT"], ["Li4SnS4", 98, 99, "PRODUCT"], ["Li4SnS4", 144, 145, "PRODUCT"]]

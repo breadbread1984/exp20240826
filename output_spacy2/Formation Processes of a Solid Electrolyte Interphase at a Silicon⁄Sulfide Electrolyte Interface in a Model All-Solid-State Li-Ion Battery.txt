@@ -1,0 +1,1 @@
+[["<1 nm", 46, 49, "QUANTITY"], ["first", 85, 86, "ORDINAL"], ["first", 122, 123, "ORDINAL"], ["13 nm", 134, 136, "QUANTITY"], ["P2S5", 145, 146, "PRODUCT"], ["first", 151, 152, "ORDINAL"]]
