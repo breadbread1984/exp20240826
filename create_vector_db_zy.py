@@ -26,7 +26,7 @@ def main(unused_argv):
         if '-' in record['term']['formula']:
           mats = record['term']['formula'].split('-')
           if len(mats) == 2:
-            terms.add('-'.join(mats.reverse()))
+            terms.add('-'.join(mats[::-1]))
           for mat in mats:
             terms.add(mat)
 
