@@ -23,6 +23,11 @@ def main(unused_argv):
       terms.add(record['term']['name'])
       if 'formula' in record['term']:
         terms.add(record['term']['formula'])
+        if '-' in record['term']['formula']:
+          mats = record['term']['formula'].split('-')
+          terms.add(mats)
+          if len(mats) == 2:
+            terms.add('-'.join(mats.reverse()))
 
   embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
   vectordb = Chroma.from_documents(documents = [Document(page_content = term) for term in terms], embedding = embeddings, persist_directory = FLAGS.output)
