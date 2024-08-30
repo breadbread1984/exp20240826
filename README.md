@@ -30,6 +30,10 @@ cat output.cypher | cypher-shell -a <host> -u <username> -p <password> -d <datab
 python3 create_vector_db.py --host <host> --username <username> --password <password> --database <database> --output <path/to/vectordb>
 ```
 
+| prebuilt vectordb | url |
+|-------------------|-----|
+| vectordb.tar.gz   | https://drive.google.com/file/d/1Eqnu5dr0ovmzVSdLzsu7hM6AcPAJY34_/view?usp=sharing |
+
 ### create vectordb from Zhao Ying extracted terms
 
 ```shell
@@ -43,8 +47,7 @@ python3 create_vector_db_zy.py --host <host> --username <username> --password <p
 
 | prebuilt vectordb | url |
 |-------------------|-----|
-| vectordb.tar.gz   | https://drive.google.com/file/d/1Eqnu5dr0ovmzVSdLzsu7hM6AcPAJY34_/view?usp=sharing |
-| vectordb_zy.tar.gz | https://drive.google.com/file/d/1z1xeZROZ9G0U0zgU7qu8C4PqecwROAma/view?usp=sharing |
+| vectordb_zy.tar.gz | https://drive.google.com/file/d/1E4TQ3-6ZuvQKbw3HE3Po4frGzdGF_UiF/view?usp=sharing |
 
 ## retrieve key words from text
 
