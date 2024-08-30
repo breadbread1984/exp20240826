@@ -12,7 +12,7 @@ def add_options():
   flags.DEFINE_string('host', default = 'bolt://localhost:7687', help = 'host')
   flags.DEFINE_string('username', default = 'neo4j', help = 'user name')
   flags.DEFINE_string('password', default = 'neo4j', help = 'password')
-  flags.DEFINE_string('output', default = 'vector_db_zy', help = 'path to output vectordb')
+  flags.DEFINE_string('output', default = 'vectordb_zy', help = 'path to output vectordb')
 
 def main(unused_argv):
   driver = GraphDatabase.driver(FLAGS.host, auth = (FLAGS.username, FLAGS.password))
