@@ -30,7 +30,7 @@ cat output.cypher | cypher-shell -a <host> -u <username> -p <password> -d <datab
 python3 create_vector_db.py --host <host> --username <username> --password <password> --database <database> --output <path/to/vectordb>
 ```
 
-## create vectordb from Zhao Ying extracted terms
+### create vectordb from Zhao Ying extracted terms
 
 ```shell
 echo "create database byllm; create database mner; create database wikift;" | cypher-shell -a bolt://localhost:
@@ -38,7 +38,7 @@ echo "create database byllm; create database mner; create database wikift;" | cy
 cat zhaoying_graph_db/byllm.cypher | cypher-shell -a bolt://localhost:7687 -u neo4j -p neo4j -d byllm
 cat zhaoying_graph_db/mner.cypher | cypher-shell -a bolt://localhost:7687 -u neo4j -p neo4j -d mner
 cat zhaoying_graph_db/wikift.cypher | cypher-shell -a bolt://localhost:7687 -u neo4j -p neo4j -d wikift
-python3 create_vector_db_zy.py
+python3 create_vector_db_zy.py --host <host> --username <username> --password <password> --output <path/to/vectordb>
 ```
 
 | prebuilt vectordb | url |
