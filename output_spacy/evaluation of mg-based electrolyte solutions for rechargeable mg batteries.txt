@@ -1,0 +1,1 @@
+[["One", 0, 1, "CARDINAL"], ["Mg", 25, 26, "PERSON"], ["the last few years", 31, 35, "DATE"], ["Mg", 49, 50, "PERSON"], ["2", 79, 80, "CARDINAL"], ["Mg[B(HFIP)4]2/DME", 84, 87, "ORG"], ["Mg", 128, 129, "PERSON"], ["Mg[B(HFIP)4]2/DME", 147, 150, "ORG"], ["Mg", 156, 157, "PERSON"], ["95%", 167, 169, "PERCENT"], ["first", 171, 172, "ORDINAL"], ["Mg", 241, 242, "PERSON"]]

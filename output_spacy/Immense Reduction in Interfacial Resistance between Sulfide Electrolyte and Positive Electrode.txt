@@ -1,0 +1,1 @@
+[["Li", 20, 21, "PERSON"], ["Li", 67, 68, "PERSON"], ["10", 122, 123, "CARDINAL"], ["2800-fold", 149, 152, "CARDINAL"], ["Li", 173, 174, "PERSON"]]
