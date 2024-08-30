@@ -40,6 +40,9 @@ def main(unused_argv):
   terms.add('Li1.3Al0.21B0.08In0.01Ti1.7(PO4)3')
   terms.add('Lithium Aluminum Boron Titanium Phosphate')
   terms.add('Lithium Aluminum Boron Indium Titanium Phosphate')
+  terms.add('hexamethyldisilazide magnesium chloride')
+  terms.add('TFSI-bis(trifluoromethanesulfonyl)imide')
+  terms.add('Mg(TFSI)2–MgCl2')
 
   embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
   vectordb = Chroma.from_documents(documents = [Document(page_content = term) for term in terms], embedding = embeddings, persist_directory = FLAGS.output)
