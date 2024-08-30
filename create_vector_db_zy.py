@@ -32,6 +32,7 @@ def main(unused_argv):
   terms.add('LiCoO2')
   terms.add('Li3PO4')
   terms.add('Li4SnS4')
+  terms.add('LiBH4')
 
   embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
   vectordb = Chroma.from_documents(documents = [Document(page_content = term) for term in terms], embedding = embeddings, persist_directory = FLAGS.output)
