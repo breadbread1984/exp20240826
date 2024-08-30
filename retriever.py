@@ -21,7 +21,7 @@ def main(unused_argv):
   tokens = list()
   with open(FLAGS.input, 'r') as f:
     text = f.read()
-    sentences = text.split('.,!?')
+    sentences = text.split('.',',','!','?')
     for sentence in sentences:
       sentence_start_pos = text.find(sentence)
       words = sentence.split(' ')
