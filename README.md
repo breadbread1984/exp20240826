@@ -47,7 +47,7 @@ python3 create_vector_db_zy.py --host <host> --username <username> --password <p
 
 | prebuilt vectordb | url |
 |-------------------|-----|
-| vectordb_zy.tar.gz | https://drive.google.com/file/d/1E4TQ3-6ZuvQKbw3HE3Po4frGzdGF_UiF/view?usp=sharing |
+| vectordb_zy.tar.gz | https://drive.google.com/file/d/1zFAlUTJMA0KadEy9l6psCKOARGBk6yKl/view?usp=sharing |
 
 ## retrieve key words from text
 
