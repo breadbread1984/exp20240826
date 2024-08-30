@@ -1,27 +1,33 @@
 #!/usr/bin/python3
 
-from os.path import join
-import json
+from absl import flags, app
+from neo4j import GraphDatabase
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
 from langchain_core.documents.base import Document
 
-terms = set()
-with open(join('zhaoying_graph_db', 'byllm.json'), 'r', encoding = 'utf-8-sig') as f:
-  graph = json.loads(f.read())
-  for relation in graph:
-    terms.add(relation['a']['properties']['name'])
-    terms.add(relation['b']['properties']['name'])
-with open(join('zhaoying_graph_db', 'mner.json'), 'r', encoding = 'utf-8-sig') as f:
-  graph = json.loads(f.read())
-  for relation in graph:
-    terms.add(relation['a']['properties']['name'])
-    terms.add(relation['b']['properties']['name'])
-with open(join('zhaoying_graph_db', 'wikift.json'), 'r', encoding = 'utf-8-sig') as f:
-  graph = json.loads(f.read())
-  for relation in graph:
-    terms.add(relation['a']['properties']['name'])
-    terms.add(relation['b']['properties']['name'])
-embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
-vectordb = Chroma.from_documents(documents = [Document(page_content = term) for term in terms], embedding = embeddings, persist_directory = 'vectordb_zy')
-vectordb.persist()
+FLAGS = flags.FLAGS
+
+def add_options():
+  flags.DEFINE_string('host', default = 'bolt://localhost:7687', help = 'host')
+  flags.DEFINE_string('username', default = 'neo4j', help = 'user name')
+  flags.DEFINE_string('password', default = 'neo4j', help = 'password')
+  flags.DEFINE_string('output', default = 'vector_db_zy', help = 'path to output vectordb')
+
+def main(unused_argv):
+  driver = GraphDatabase.driver(FLAGS.host, auth = (FLAGS.username, FLAGS.password))
+  terms = set()
+  for db in ['byllm', 'mner', 'wikift']:
+    records, summary, keys = driver.execute_query('match (a) return a as term', database_ = db)
+    for record in records:
+      terms.add(record['term']['name'])
+      if 'formula' in record['term']:
+        terms.add(record['term']['formula'])
+
+  embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+  vectordb = Chroma.from_documents(documents = [Document(page_content = term) for term in terms], embedding = embeddings, persist_directory = FLAGS.output)
+  vectordb.persist()
+
+if __name__ == "__main__":
+  add_options()
+  app.run(main)
