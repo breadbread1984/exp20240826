@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import re
 from absl import flags, app
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
@@ -21,7 +22,7 @@ def main(unused_argv):
   tokens = list()
   with open(FLAGS.input, 'r') as f:
     text = f.read()
-    sentences = text.split('.',',','!','?')
+    sentences = re.split('[.,!?]', text)
     for sentence in sentences:
       sentence_start_pos = text.find(sentence)
       words = sentence.split(' ')
