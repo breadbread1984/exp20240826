@@ -22,7 +22,7 @@ def main(unused_argv):
   tokens = list()
   with open(FLAGS.input, 'r') as f:
     text = f.read()
-    sentences = re.split('[.,!?]', text)
+    sentences = re.split(r'(\s+[\.,!?]|[\.,!?]\s+)', text)
     for sentence in sentences:
       sentence_start_pos = text.find(sentence)
       words = sentence.split(' ')
